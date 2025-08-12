@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Alan Arakkal — CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#800000; /* maroon */
+    --muted:#a85c74;  /* muted pinkish */
+    --bg:#fff0f3;     /* very light pink */
+    --card:#fff5f7;   /* light pink card background */
+    --radius:12px;
+    --glass: rgba(255,255,255,0.7);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    margin:0;
+    background: linear-gradient(180deg,var(--bg),#fff 40%);
+    color:#7a2e3b;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.5;
+    padding:32px;
+  }
+
+  /* header */
+  header.site-header{
+   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(255, 245, 247, 0.85); /* or your preferred background */
+  backdrop-filter: blur(6px); /* optional for frosted effect */
+  border-bottom: 1px solid rgba(122, 46, 59, 0.1);
+  z-index: 1000; /* ensure it's above other content */
+  padding: 12px 28px; /* your existing padding */
+  }
+  .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:20px;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--accent)}
+  .brand .logo{
+    display:none; /* removed "J" */
+  }
+  .brand .title{
+    font-weight:700; 
+    font-size:1rem;
+    color: var(--accent);
+  }
+
+  nav.top-nav a{
+    color:var(--muted);
+    text-decoration:none;
+    margin-left:18px;
+    font-weight:600;
+  }
+  nav.top-nav a:hover{
+    color:var(--accent);
+  }
+
+  /* layout */
+  .wrap{
+    max-width:1100px;
+    margin:28px auto 80px;
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:28px;
+    padding:0 12px;
+  }
+  @media (max-width:880px){
+    .wrap{
+      grid-template-columns:1fr
+    }
+    .site-header{
+      padding:10px
+    }
+  }
+
+  /* sidebar */
+  aside.card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:0 8px 30px rgba(122,46,59,0.06);
+    position:relative;
+    overflow:hidden;
+  }
+  .photo {
+    width: 96px;
+    height: 120px;
+    border-radius: 14px;
+    background: none;
+    display: inline-grid;
+    place-items: center;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    object-fit: cover;
+  }
+  h1.name{
+    margin:0;
+    font-size:1.25rem;
+    color: var(--accent);
+  }
+  p.role{
+    margin:6px 0 16px;
+    color:var(--muted);
+    font-weight:600;
+  }
+
+  .muted{
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+
+  .badge{
+    display:inline-block;
+    background:#f7d1db;
+    color:#800000;
+    padding:6px 10px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:0.85rem;
+    margin-top:10px;
+  }
+
+  /* skills */
+  .block-title{
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:8px;
+    margin-top:12px;
+  }
+  .skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .skill{
+    background:#f7d1db;
+    padding:6px 10px;
+    border-radius:999px;
+    color:#800000;
+    font-weight:600;
+    font-size:0.85rem;
+  }
+
+  /* main content */
+  main.card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    box-shadow:0 8px 30px rgba(122,46,59,0.06);
+  }
+  main h2{
+    color:var(--accent);
+    margin-top:6px;
+    margin-bottom:8px;
+  }
+  .lead{
+    color:var(--muted);
+    margin-bottom:12px;
+  }
+  .section{
+    margin-top:18px;
+  }
+  .edu-table, .awards-table{
+    width:100%;
+    border-collapse:collapse;
+  }
+  .edu-table th{
+    width:220px;
+    text-align:left;
+    padding:8px 12px;
+    color:var(--accent);
+    vertical-align:top;
+    font-weight:700;
+  }
+  .edu-table td{
+    padding:8px 12px;
+  }
+  .pubs{
+    padding-left:18px;
+    margin:0;
+    color:#7a2e3b;
+  }
+  .pubs li{
+    margin-bottom: 8px;
+  }
+
+  /* publications toggler */
+  .pub-toggle{
+    display:flex;
+    justify-content:center;
+    margin-top:12px;
+  }
+  .btn{
+    background:var(--accent);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    font-weight:700;
+    box-shadow:0 10px 20px rgba(122,46,59,0.12);
+  }
+  .btn.ghost{
+    background:transparent;
+    color:var(--accent);
+    box-shadow:none;
+    border:1px solid rgba(122,46,59,0.08);
+  }
+
+  /* small helpers */
+  .muted-small{
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  .meta{
+    font-size:0.95rem;
+    color:var(--muted);
+  }
+
+  footer{
+    max-width:1100px;
+    margin:28px auto;
+    text-align:center;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  /* print styles */
+  @media print{
+    body{
+      background:white;
+      padding:0;
+      color: black;
+    }
+    header.site-header, .btn, .pub-toggle, nav.top-nav{
+      display:none;
+    }
+    .wrap{
+      grid-template-columns:1fr;
+      padding:0;
+    }
+    main.card, aside.card{
+      box-shadow:none;
+      border:none;
+    }
+  }
+
+  /* small animation */
+  .fade-up{
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .fade-up.visible{
+    opacity:1;
+    transform:none;
+  }
+
+  /* offset anchor targets for fixed/sticky header */
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <div class="header-inner">
+<a class="brand" href="index.html" aria-label="JANE LLC homepage">
+  <span class="title">JANE LLC</span>
+</a>
+    <nav class="top-nav" role="navigation" aria-label="Top">
+      <a href="#about">Professional Summary</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#software">Software</a>
+      <a href="#awards">Honors & Awards</a>
+      <a href="#publications">Publications</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <!-- SIDEBAR -->
+  <aside class="card" aria-labelledby="profile-name">
+    <div style="display:flex;gap:14px;align-items:center">
+      <img src="alan-photo.jpg" alt="Photo of Alan Arakkal" class="photo" />
+      <div>
+        <h1 id="profile-name" class="name">Alan Arakkal</h1>
+        <div class="role">PhD Candidate — Biostatistics</div>
+        <div class="muted">University of Iowa</div>
+        <div class="badge">Biostatistics Consulting</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="block-title">Programming Skills</div>
+      <div class="skills" aria-hidden="false">
+        <div class="skill">R</div>
+        <a href="https://www.credly.com/users/alan-arakkal/badges?filter%5Buser_name%5D=Alan%20Arakkal&source=earner_directory" target="_blank" rel="noopener noreferrer" class="no-underline" style="text-decoration:none;color:inherit;">
+          <div class="skill">SAS</div>
+        </a>
+        <div class="skill">Julia</div>
+        <div class="skill">Python</div>
+        <div class="skill">SPSS</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="block-title">Tools</div>
+      <div class="skills" aria-hidden="false">
+        <div class="skill">High-Performance Computing</div>
+        <div class="skill">AWS</div>
+        <div class="skill">Git</div>
+        <div class="skill">Shiny</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="block-title">Research Interests</div>
+      <div class="muted-small">Healthcare data analysis · Statistical computing · Network analysis · Infectious diseases · Computational epidemiology</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="card" role="main">
+    <section id="about" class="fade-up">
+      <h2>Professional Summary</h2>
+      <p class="lead">PhD candidate in Biostatistics specializing in the management and analysis of large-scale datasets to uncover insights into various public health issues, such as injury prevention, healthcare trends, and diagnostic delays. Proficient in statistical analysis, programming, and collaborating with multidisciplinary teams. Co-author of multiple peer-reviewed publications focusing on public health issues. Skilled in disseminating research findings and leveraging data to answer research questions that help improve health outcomes. Actively conducting research in the development of advanced statistical and machine learning techniques, including unsupervised learning methods such as clustering, to analyze complex network data.</p>
+    </section>
+
+    <section id="education" class="section fade-up">
+      <h2>Education</h2>
+      <table class="edu-table" aria-label="Education">
+        <tr>
+          <th>University of Iowa<br><small class="meta">2019 – 2025 (anticipated)</small></th>
+          <td><strong>PhD, Biostatistics</strong><br><strong>MS, Biostatistics</strong><br>GPA: 4.19/4.0</td>
+        </tr>
+        <tr>
+          <th>University of Colorado Denver, Anschutz Medical Campus<br><small class="meta">2017 – 2019</small></th>
+          <td><strong>MS, Epidemiology</strong> <br> GPA: 3.985/4.0<br>Thesis: <a href="https://digitalcollections.cuanschutz.edu/work/ns/219bb0df-1386-447e-85e2-bbeceea4fc1b" target="_blank" rel="noopener">The Effect of Traumatic Brain Injury State Laws on Incident and Recurrent Concussion Rates</a></td>
+        </tr>
+        <tr>
+          <th>Drake University<br><small class="meta">2010 – 2024</small></th>
+          <td><strong>BS, Biochemistry, Cell & Molecular Biology</strong><br><strong>BA, Chemistry</strong><br>GPA: 3.98/4.0</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="experience" class="section fade-up">
+      <h2>Work Experience</h2>
+
+      <h3>Graduate Research Assistant <small>— University of Iowa (July 2019 – present)</small></h3>
+      <p>Responsible for data management and analysis of large U.S. medical and pharmacy claims databases (e.g., MarketScan and HCUP). Apply advanced statistical methods to analyze healthcare trends and derive insights into critical issues, such as diagnostic delays, disease transmission, opioid overdoses, and other public health challenges. Develop and maintain custom R packages to automate and streamline data processing workflows, enhance reproducibility, and improve accessibility for research collaborators. Utilize relational databases and high-performance computing resources to efficiently process and analyze large, complex datasets, thereby significantly reducing computation time and enhancing analytical capacity. Contribute to grant development and co-author peer-reviewed publications. Support broader research infrastructure through technical documentation, reporting, and mentorship of junior team members.</p>
+
+      <h3>Professional Research Assistant <small>— University of Colorado Denver, Anschutz Medical Campus (April 2018 – May 2019)</small></h3>
+      <p>Maintained the online data collection system, oversaw participant enrollment, provided technical support, and ensured compliance with reporting requirements for the High School RIO<sup>TM</sup> (Research Injury and Outcomes) surveillance study. High School RIO<sup>TM</sup> monitors and analyzes sports injuries among high school athletes, focusing on concussion incidence, injury trends, and the effectiveness of safety policies. Managed study data and applied advanced statistical techniques to analyze injury patterns, including traumatic brain injuries, concussions, and musculoskeletal injuries. Developed custom SAS macros to automate data processing, enhance reproducibility, and facilitate collaboration with researchers. Co-authored multiple peer-reviewed publications on sports injury epidemiology and the effectiveness of injury prevention strategies.</p>
+
+      <h3>Data Analyst <small>— Children’s Hospital Colorado (June 2018 – August 2018)</small></h3>
+       <p>Responsible for data management and analysis of respiratory syncytial virus (RSV)-related hospital discharge data from the Colorado Hospital Association. Analyzed trends in hospitalizations, demographic patterns, and disease outcomes to inform public health initiatives to attenuate the burden of RSV in Colorado. Facilitated communication with international collaborators for a parallel RSV study conducted in Indonesia, coordinating efforts between U.S. and Indonesian teams to ensure data consistency, project alignment, and the seamless integration of findings across both studies.</p>
+
+      <h3>Teaching Assistant <small>— University of Colorado Denver, Anschutz Medical Campus (January 2018 – May 2018)</small></h3>
+      <p>Responsible for organizing course material and maintaining the online course page. Graded weekly homework assignments and maintained attendance records. Taught and facilitated classroom discussions. Worked individually with students who needed additional assistance.</p>
+      
+      <h3>Student Assistant VI <small>— University of Colorado Denver, Anschutz Medical Campus (August 2017 – March 2018)</small></h3>
+      <p>Assisted with conducting survey operations for an on-going statewide project related to health, behavior, safety, and marijuana surveys. Responsible for preparing and tracking survey materials, data entry, and data cleaning. Managed large datasets, created QA reports, and analyzed datasets using SAS.</p>
+
+    </section>
+
+    <section id="software" class="section fade-up">
+      <h2>Software</h2>
+      <p>Author of R package <a href="https://CRAN.R-project.org/package=JANE" target="_blank" rel="noopener">JANE</a></p>
+    </section>
+
+    <section id="awards" class="section fade-up">
+      <h2>Honors & Awards</h2>
+      <table class="awards-table">
+        <tr><th>2025</th><td>William R. Clarke Graduate Assistant Research Award</td></tr>
+        <tr><th>2023</th><td>Leon F. Burmeister Memorial Scholarship in Biostatistics</td></tr>
+        <tr><th>2020</th><td>Jess Kraus Award in <em>Injury Epidemiology</em> (2nd place)</td></tr>
+        <tr><th>2020</th><td>Phi Beta Delta Honor Society</td></tr>
+        <tr><th>2019</th><td>Dept. of Epidemiology Scholarship in Infectious Diseases</td></tr>
+        <tr><th>2019</th><td><a href="https://bcert.me/szabmqziz" target="_blank" rel="noopener">Delta Omega National Honorary Society</a></td></tr>
+      </table>
+    </section>
+
+    <section id="publications" class="section fade-up">
+      <h2>Publications</h2>
+      <ol class="pubs" id="pubList">
+        <li>Miller AC, <strong>Arakkal AT</strong>, Cavanaugh JE, Polgreen PM, Streit JA. Incidence, Duration, and Risk Factors for Diagnostic Delays Associated with Dengue: A Population-Based Study. Am J Trop Med Hyg. 2025.</li>
+        <li><strong>Arakkal AT</strong>, Sewell DK. JANE: Just Another latent space NEtwork clustering algorithm. Computational Statistics & Data Analysis. 2025;211.</li>
+        <li>Struble RD, <strong>Arakkal AT</strong>, Cavanaugh JE, Polgreen PM, Miller AC. Evaluating potential missed opportunities to prevent, treat, or diagnose sepsis: A population-based retrospective study of insurance claims. Critical Care Explorations. 2025;7(4).</li>
+        <li>Miller AC, <strong>Arakkal AT</strong>, Sewell DK, et al. Hospitalizations among family members increase the risk of MRSA infection in a household. Infect Control Hosp Epidemiol. Published online August 7, 2024.</li>
+        <li><strong>Arakkal, Alan T.</strong>, Cavanaugh JE, Polgreen PM, Miller AC. The Increase in Household Transmission of Pertussis Associated With Diagnostic Delays. Pediatr Infect Dis J. 2024.</li>
+        <li><strong>Arakkal AT</strong>, Polgreen LA, Chapman CG, et al. Association between household opioid prescriptions and risk for overdose among family members not prescribed opioids. Pharmacotherapy. 2023;00:1-12.</li>
+        <li>Miller AC, <strong>Arakkal AT</strong>, Sewell DK, et al. Comparison of different antibiotics and the risk for community-associated Clostridioides difficile infection: a case-control study. Open Forum Infect Dis. 2023.</li>
+        <li>Miller AC, Cavanaugh JE, <strong>Arakkal AT</strong>, et al. A comprehensive framework to estimate the frequency, duration, and risk factors for diagnostic delays using bootstrapping-based simulation methods. BMC Med Inform Decis Mak. 2023;23:68.</li>
+        <li>Evans NJ, <strong>Arakkal AT</strong>, Cavanaugh JE, Newland JG, Polgreen PM, Miller AC. The incidence, duration, risk factors, and age-based variation of missed opportunities to diagnose pertussis: A population-based cohort study. Infect Control Hosp Epidemiol. 2023:1-8.</li>
+        <li>Miller AC, <strong>Arakkal AT</strong>, Koeneman SH, Cavanaugh JE, Polgreen PM. A clinically-guided unsupervised clustering approach to recommend symptoms of disease associated with diagnostic opportunities. Diagnosis (Berl). 2022 Sep 21.</li>
+        <li>Miller AC, <strong>Arakkal AT</strong>, Sewell DK, et al. Risk for Asymptomatic Household Transmission of Clostridioides difficile Infection Associated with Recently Hospitalized Family Members. Emerg Infect Dis. 2022;28(5):932-939.</li>
+        <li>Miller AC, <strong>Arakkal AT</strong>, Koeneman SH, Cavanaugh JE, Thompson GR, Baddley JW, Polgreen PM. Frequency and Duration of, and Risk Factors for, Diagnostic Delays Associated with Histoplasmosis. J Fungi (Basel). 2022;8(5):438.</li>
+        <li>Miller AC, Koeneman SH, <strong>Arakkal AT</strong>, et al. Incidence, duration and risk factors associated with missed opportunities to diagnose herpes simplex encephalitis: A population-based longitudinal study. Open Forum Infect Dis. 2021.</li>
+        <li>Miller AC, <strong>Arakkal AT</strong>, Koeneman SH, et al. Incidence, duration and risk factors associated with delayed and missed diagnostic opportunities related to tuberculosis: A population-based longitudinal study. BMJ Open. 2021;11(2).</li>
+        <li>Kriz PK, Yang J, <strong>Arakkal A</strong>, Keeley T, Comstock RD. Fair Play as an Injury Prevention Intervention: Do Yellow Card Accumulation Policies Reduce High School Soccer Injuries? Clin J Sport Med. 2020 Sep.</li>
+        <li>Chandran A, Kerr ZY, Roby PR, Nedimyer A, <strong>Arakkal A</strong>, et al. Concussion Symptom Characteristics and Resolution in 20 United States High School Sports, 2013/14-2017/18 Academic Years. Neurosurgery. 2020;87(3):573-583.</li>
+        <li>Comstock RD, <strong>Arakkal AT</strong>, Pierpoint LA, Fields SK. Are high school girls’ lacrosse players at increased risk of concussion because they are not allowed to wear the same helmet boys’ lacrosse players are required to wear? Inj Epidemiol. 2020;7(1):18.</li>
+        <li><strong>Arakkal AT</strong>, Baron AE, Lamb MM, Fields SK, Comstock RD. Evaluating the effectiveness of traumatic brain injury state laws among high school athletes. Inj Epidemiol. 2020;7(1):12.</li>
+        <li>Hammer E, Brooks MA, Hetzel S, <strong>Arakkal A</strong>, Comstock RD. Epidemiology of Injuries Sustained in Boys’ High School Contact and Collision Sports, 2008-2009 Through 2012-2013. Orthop J Sport Med. 2020;8(2).</li>
+        <li>Kerr ZY, Chandran A, Nedimyer AK, <strong>Arakkal A</strong>, Pierpoint LA, Zuckerman SL. Concussion incidence and trends in 20 high school sports. Pediatrics. 2019;144(5).</li>
+        <li>Oliver GD, Saper MG, Drogosz M, Plummer H, <strong>Arakkal A</strong>, et al. Epidemiology of shoulder and elbow injuries among US high school softball players, 2005-2006 through 2016-2017. Orthop J Sport Med. 2019;7(9).</li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  window.addEventListener('load', () => {
+    const elements = document.querySelectorAll('.fade-up');
+    elements.forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 300);
+    });
+  });
+</script>
+
+</body>
+</html>

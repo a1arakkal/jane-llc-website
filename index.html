@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>JANE LLC Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --accent: #800000;       /* Maroon */
+    --accent-light: #d46a8c; /* Soft pink */
+    --bg: linear-gradient(135deg, #800000, #d46a8c);
+    --text-light: #f5e6e8;
+    --text-dark: #3a0b0f;
+    --card-bg: #fff0f3;
+    --radius: 12px;
+    --shadow: rgba(128,0,0,0.2);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: rgba(255 230 235 / 0.15);
+    backdrop-filter: blur(10px);
+    padding: 20px 40px;
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header .logo {
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 1.5px;
+    color: var(--text-light);
+  }
+  nav {
+    display: flex;
+    gap: 24px;
+  }
+  nav button {
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    transition: background-color 0.3s ease;
+  }
+  nav button:hover,
+  nav button:focus {
+    background-color: rgba(212, 106, 140, 0.4);
+    outline: none;
+  }
+  nav button.active {
+    background-color: var(--accent-light);
+    box-shadow: 0 4px 12px rgba(212, 106, 140, 0.6);
+    color: var(--text-dark);
+  }
+
+  main {
+    flex-grow: 1;
+    max-width: 960px;
+    margin: 30px auto 60px;
+    background: var(--card-bg);
+    color: var(--text-dark);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 30px rgba(128,0,0,0.15);
+    padding: 30px 40px;
+  }
+
+  /* Tab content sections */
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+
+  /* Consultants tab styling */
+  .consultants-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .consultant-card {
+    background: var(--accent);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 20px rgba(128,0,0,0.3);
+    width: 240px;
+    text-align: center;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .consultant-card:hover,
+  .consultant-card:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(128,0,0,0.6);
+    outline: none;
+  }
+  .consultant-photo {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: var(--radius) var(--radius) 0 0;
+    display: block;
+    border-bottom: 4px solid var(--accent-light);
+  }
+  .consultant-name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 12px 0 6px;
+  }
+  .consultant-role {
+    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 14px;
+  }
+
+  /* Added contact info below photo */
+  .consultant-contact {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .consultant-contact a {
+    color: var(--accent-light);
+    text-decoration: underline;
+  }
+  .cv-link {
+    background: var(--accent-light);
+    color: var(--text-dark);
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(212, 106, 140, 0.7);
+    transition: background-color 0.3s ease;
+  }
+  .cv-link:hover,
+  .cv-link:focus {
+    background-color: var(--accent);
+    color: var(--text-light);
+    outline: none;
+  }
+
+  /* About tab styling */
+  #about p {
+    line-height: 1.6;
+    font-size: 1.05rem;
+  }
+
+  /* Contact tab styling */
+  #contact p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  #contact a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  #contact a:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    text-align: center;
+    padding: 12px 0;
+    color: rgba(255 230 235 / 0.8);
+    font-size: 0.9rem;
+    background: rgba(0 0 0 / 0.05);
+  }
+
+  @media (max-width: 600px) {
+    main {
+      padding: 20px 24px;
+      margin: 20px 12px 50px;
+    }
+    .consultants-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+    nav {
+      gap: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">JANE LLC</div>
+  <nav role="tablist" aria-label="Primary navigation">
+    <button role="tab" aria-selected="true" aria-controls="about" id="tab-about" class="active">About</button>
+    <button role="tab" aria-selected="false" aria-controls="consultants" id="tab-consultants">Consultants</button>
+    <button role="tab" aria-selected="false" aria-controls="contact" id="tab-contact">Contact</button>
+  </nav>
+</header>
+
+<main>
+  <section id="about" class="tab-content active" role="tabpanel" aria-labelledby="tab-about">
+    <h1>Welcome to JANE LLC</h1>
+    <p>We offer expert biostatistics consulting services to help you tackle complex data challenges in healthcare and public health research. Our mission is to empower researchers and organizations with robust statistical insights, innovative data science methods, and collaborative expertise.</p>
+  </section>
+
+<section id="consultants" class="tab-content" role="tabpanel" aria-labelledby="tab-consultants" style="text-align:center;">
+  <div style="
+    display: inline-block;
+    background: var(--accent);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 20px rgba(128,0,0,0.3);
+    width: 280px;
+    color: var(--text-light);
+    padding-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+  ">
+<img
+  src="alan-photo.jpg"
+  alt="Photo of Alan Arakkal"
+  style="
+    width: 280px;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: var(--radius) var(--radius) 0 0;
+    border-bottom: 4px solid var(--accent-light);
+    display: block;
+    margin: 0 auto;
+    background: var(--card-bg);
+  "
+/>
+    <div style="padding: 15px 20px;">
+      <h2 style="margin: 12px 0 6px; font-weight: 700; font-size: 1.5rem;">Alan Arakkal</h2>
+      <p style="font-weight: 600; font-size: 1rem; opacity: 0.9; margin: 6px 0 16px;">PhD Candidate — Biostatistics</p>
+      <p style="font-size: 0.95rem; line-height: 1.4; margin: 6px 0;">
+        Email: <a href="mailto:alan.arakkal@gmail.com" style="color: var(--accent-light); text-decoration: underline;">alan.arakkal@gmail.com</a>
+      </p>
+      <p style="font-size: 0.95rem; line-height: 1.4; margin: 6px 0 20px;">
+        Phone: <a href="tel:7203386143" style="color: var(--accent-light); text-decoration: underline;">720-338-6143</a>
+      </p>
+      <a href="cv.html" style="
+        background: var(--accent-light);
+        color: var(--text-dark);
+        font-weight: 700;
+        padding: 10px 20px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(212, 106, 140, 0.7);
+        display: inline-block;
+        transition: background-color 0.3s ease;
+      "
+      onmouseover="this.style.backgroundColor='var(--accent)'; this.style.color='var(--text-light)';"
+      onmouseout="this.style.backgroundColor='var(--accent-light)'; this.style.color='var(--text-dark)';"
+      >View CV</a>
+    </div>
+  </div>
+</section>
+
+  <section id="contact" class="tab-content" role="tabpanel" aria-labelledby="tab-contact">
+    <h1>Contact Us</h1>
+    <p>Interested in consulting, collaboration, or just want to say hello? Reach out!</p>
+    <p>Email: <a href="mailto:alan.arakkal@gmail.com">alan.arakkal@gmail.com</a></p>
+    <p>Phone: <a href="tel:7203386143">720-338-6143</a></p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 JANE LLC — Alan Arakkal
+</footer>
+
+<script>
+  // Tab switching logic
+  const tabs = document.querySelectorAll('nav button[role="tab"]');
+  const tabPanels = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active from all tabs and hide all panels
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tabPanels.forEach(panel => panel.classList.remove('active'));
+
+      // Activate clicked tab and panel
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      const panel = document.getElementById(tab.getAttribute('aria-controls'));
+      panel.classList.add('active');
+      panel.focus();
+    });
+  });
+</script>
+
+</body>
+</html>
