@@ -7,8 +7,10 @@ window.onload = () => {
   document.body.style.opacity = 1;
 };
 
+document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.flip-tile').forEach(tile => {
     tile.addEventListener('click', () => {
       tile.classList.toggle('flipped');
     });
   });
+});
