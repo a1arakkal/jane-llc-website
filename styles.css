@@ -16,7 +16,7 @@ html, body {
   background: linear-gradient(-45deg, #800000, #FF6F91, #a52a2a, #FFB6C1);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  padding-top: 70px; /* space for fixed header */ 
+  padding-top: 70px; /* space for fixed header */
 }
 
 @keyframes gradientBG {
@@ -56,6 +56,8 @@ html, body {
 .hero-logo {
   width: 250px;
   margin-top: 20px;
+  max-width: 90%;
+  height: auto;
 }
 
 .hero-statement {
@@ -86,7 +88,6 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(5px);
 }
 
 .tile:hover {
@@ -102,32 +103,26 @@ html, body {
   text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
 
-/* ----------------- RESPONSIVE ----------------- */
-@media(max-width:600px){
-  .hero-logo { width: 180px; }
-  .hero-statement { font-size: 1.2em; }
-  #tiles { grid-template-columns: 1fr; gap: 20px; }
-  .tile { padding: 60px 10px; }
-}
 /* ----------------- FLIP TILES ----------------- */
 .tiles-services {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* keep responsiveness */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 10px;
-  justify-content: center; /* center tiles horizontally */
+  justify-content: center;
   margin-top: 50px;
 }
 
 .flip-tile {
-  max-width: 500px; /* prevent full-width tiles */
-  width: 100%;       /* still scales responsively */
+  max-width: 500px;
+  width: 100%;
   perspective: 1000px;
-  margin: 0 auto;    /* center the tile in the grid cell */
+  margin: 0 auto;
 }
+
 .flip-inner {
   position: relative;
   width: 100%;
-  min-height: 350px; /* tall enough for text */
+  min-height: 350px;
   padding: 40px 20px;
   text-align: center;
   border-radius: 16px;
@@ -141,7 +136,9 @@ html, body {
   justify-content: center;
 }
 
-.flip-tile:hover .flip-inner {
+/* Hover/tap flip */
+.flip-tile:hover .flip-inner,
+.flip-tile:active .flip-inner {
   transform: rotateY(180deg);
 }
 
@@ -152,18 +149,16 @@ html, body {
   top: 0;
   left: 0;
   backface-visibility: hidden;
-
-  /* Center text */
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* vertical center */
-  align-items: center;      /* horizontal center */
-
+  justify-content: center;
+  align-items: center;
   border-radius: 16px;
   padding: 20px;
   box-sizing: border-box;
-  text-align: center;       /* ensure multi-line text is centered */
+  text-align: center;
 }
+
 .flip-front {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.3em;
@@ -171,9 +166,9 @@ html, body {
 }
 
 .flip-back {
-  background-color: #000000;   /* fully black */
-  color: var(--text-light);    /* text remains visible */
-    min-height: 430px; /* tall enough for text */
+  background-color: #000000;
+  color: var(--text-light);
+  min-height: 430px;
   transform: rotateY(180deg);
   font-size: 1em;
   line-height: 1.4em;
@@ -192,55 +187,50 @@ html, body {
 
 .flip-back ul {
   text-align: left;
-  padding-left: 25px;   /* indent bullets */
+  padding-left: 25px;
   margin: 0;
-  font-size: 1.1em;     /* larger text */
-  line-height: 1.4em;   /* normal line spacing within bullet */
+  font-size: 1.1em;
+  line-height: 1.4em;
 }
 
 .flip-back ul li {
-  margin-bottom: 1.5em; /* extra space between bullets */
+  margin-bottom: 1.5em;
 }
 
+/* ----------------- PAGE CONTENT ----------------- */
 .page-content {
-  background: transparent;      /* match page background */
-  box-shadow: none;             /* remove shadow */
-  border: none;                 /* remove border */
-  margin: 0 auto;               /* remove top/bottom margin that causes line */
-  padding: 60px 20px;           /* space around content */
-  text-align: center;           
-  color: var(--text-light);     
-  overflow: hidden;             /* prevent margin collapse artifacts */
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-light);
+  overflow: hidden;
 }
 
-/* Remove top/bottom margins on first and last child to avoid extra line */
-.page-content > *:first-child {
-  margin-top: 0;
-}
+.page-content > *:first-child { margin-top: 0; }
+.page-content > *:last-child { margin-bottom: 0; }
 
-.page-content > *:last-child {
-  margin-bottom: 0;
-}
-
-/* Text readability */
 .page-content h1, .page-content p {
   text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-  line-height: 1.6em;           /* better spacing */
+  line-height: 1.6em;
 }
 
+/* ----------------- CONSULTANTS ----------------- */
 .consultant-photo {
-  width: 130px;          /* match original width */
-  height: auto;          /* height scales automatically */
-  border-radius: 12px;   /* optional rounding */
+  width: 130px;
+  height: auto;
+  border-radius: 12px;
   margin-bottom: 20px;
   border: 3px solid var(--pink);
-  object-fit: contain;    /* scale without cropping */
+  object-fit: contain;
 }
 
 .consultant-tile {
-  width: 300px;            /* match photo width */
+  width: 300px;
   padding: 20px;
-  margin: 50px auto;       /* center horizontally */
+  margin: 50px auto;
   background: rgba(0,0,0,0.4);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
@@ -256,28 +246,22 @@ html, body {
 }
 
 .consultant-tile a {
-  color: var(--pink);           /* pink for visibility */
+  color: var(--pink);
   text-decoration: none;
   font-weight: 500;
 }
 
 .consultant-tile a:hover,
-.consultant-tile a:focus {
-  text-decoration: underline;
-  color: #FF9EB3;               /* slightly lighter pink on hover/focus */
-}
-
-.consultant-tile a:visited {
-  color: var(--pink);           /* keep same color after click */
-}
+.consultant-tile a:focus { text-decoration: underline; color: #FF9EB3; }
+.consultant-tile a:visited { color: var(--pink); }
 
 .consultant-tile p a {
-  background: rgba(0,0,0,0.4);  /* semi-transparent background behind text */
+  background: rgba(0,0,0,0.4);
   padding: 2px 4px;
   border-radius: 4px;
 }
 
-/* Contact page link styling */
+/* Contact page link */
 .contact-link {
   color: var(--pink);
   text-decoration: none;
@@ -288,21 +272,42 @@ html, body {
 }
 
 .contact-link:hover,
-.contact-link:focus {
-  color: #FF9EB3;
-  text-decoration: underline;
-}
+.contact-link:focus { color: #FF9EB3; text-decoration: underline; }
+.contact-link:visited { color: var(--pink); }
 
-.contact-link:visited {
-  color: var(--pink);
-}
-
+/* Mission photo */
 .mission-photo {
   display: block;
-  max-width: 100%;   /* ensures it doesn't exceed container width */
-  width: 300px;      /* adjust as needed */
-  height: auto;      /* preserves aspect ratio */
-  margin: 1em auto;  /* centers the image */
-  border-radius: 8px; /* optional: soft corners */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* optional: subtle shadow */
+  max-width: 100%;
+  width: 300px;
+  height: auto;
+  margin: 1em auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ----------------- RESPONSIVE ----------------- */
+@media(max-width:600px){
+  .hero-logo { width: 180px; }
+  .hero-statement { font-size: 1.2em; }
+  #tiles { grid-template-columns: 1fr; gap: 20px; }
+  .tile { padding: 60px 10px; }
+}
+
+@media(max-width:500px){
+  .tiles-services { grid-template-columns: 1fr; gap: 15px; }
+  .flip-tile { max-width: 100%; }
+  .flip-inner { min-height: 300px; padding: 20px; }
+  .flip-back { min-height: 350px; font-size: 0.9em; }
+  .site-header { padding: 0 10px; height: 50px; }
+  .site-header .logo-link { font-size: 1.2em; }
+}
+
+@media(max-width:400px){
+  .hero-statement { font-size: 1em; }
+  .tile h2 { font-size: 1.2em; }
+  .flip-front { font-size: 1.1em; }
+  .flip-back { font-size: 0.85em; line-height: 1.3em; }
+  .consultant-tile { width: 90%; padding: 15px; }
+  .consultant-photo { width: 100px; }
 }
