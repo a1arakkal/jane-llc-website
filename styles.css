@@ -1,0 +1,308 @@
+:root {
+  --maroon: #800000;
+  --pink: #FF6F91;
+  --text-light: #fff;
+}
+
+/* ----------------- BODY ----------------- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-light);
+  text-align: center;
+  transition: opacity 0.5s;
+  background: linear-gradient(-45deg, #800000, #FF6F91, #a52a2a, #FFB6C1);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  padding-top: 70px; /* space for fixed header */ 
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ----------------- SITE HEADER ----------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.site-header .logo-link {
+  color: var(--text-light);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.site-header .logo-link:hover {
+  color: var(--pink);
+}
+
+/* ----------------- HERO ----------------- */
+.hero-logo {
+  width: 250px;
+  margin-top: 20px;
+}
+
+.hero-statement {
+  font-size: 1.5em;
+  margin: 20px 0 50px 0;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+/* ----------------- TILES 2x2 GRID ----------------- */
+#tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 800px;
+  margin: 0 auto 50px auto;
+  padding: 0 20px;
+}
+
+.tile {
+  background: rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.2);
+  color: var(--text-light);
+  border-radius: 16px;
+  padding: 80px 20px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.tile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.6);
+}
+
+.tile h2 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5em;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+/* ----------------- RESPONSIVE ----------------- */
+@media(max-width:600px){
+  .hero-logo { width: 180px; }
+  .hero-statement { font-size: 1.2em; }
+  #tiles { grid-template-columns: 1fr; gap: 20px; }
+  .tile { padding: 60px 10px; }
+}
+/* ----------------- FLIP TILES ----------------- */
+.tiles-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* keep responsiveness */
+  gap: 10px;
+  justify-content: center; /* center tiles horizontally */
+  margin-top: 50px;
+}
+
+.flip-tile {
+  max-width: 500px; /* prevent full-width tiles */
+  width: 100%;       /* still scales responsively */
+  perspective: 1000px;
+  margin: 0 auto;    /* center the tile in the grid cell */
+}
+.flip-inner {
+  position: relative;
+  width: 100%;
+  min-height: 350px; /* tall enough for text */
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.4);
+  color: var(--text-light);
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flip-tile:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  min-height: 350px;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+
+  /* Center text */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertical center */
+  align-items: center;      /* horizontal center */
+
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;       /* ensure multi-line text is centered */
+}
+.flip-front {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3em;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+.flip-back {
+  background-color: #000000;   /* fully black */
+  color: var(--text-light);    /* text remains visible */
+    min-height: 430px; /* tall enough for text */
+  transform: rotateY(180deg);
+  font-size: 1em;
+  line-height: 1.4em;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-back h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.flip-back ul {
+  text-align: left;
+  padding-left: 25px;   /* indent bullets */
+  margin: 0;
+  font-size: 1.1em;     /* larger text */
+  line-height: 1.4em;   /* normal line spacing within bullet */
+}
+
+.flip-back ul li {
+  margin-bottom: 1.5em; /* extra space between bullets */
+}
+
+.page-content {
+  background: transparent;      /* match page background */
+  box-shadow: none;             /* remove shadow */
+  border: none;                 /* remove border */
+  margin: 0 auto;               /* remove top/bottom margin that causes line */
+  padding: 60px 20px;           /* space around content */
+  text-align: center;           
+  color: var(--text-light);     
+  overflow: hidden;             /* prevent margin collapse artifacts */
+}
+
+/* Remove top/bottom margins on first and last child to avoid extra line */
+.page-content > *:first-child {
+  margin-top: 0;
+}
+
+.page-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Text readability */
+.page-content h1, .page-content p {
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  line-height: 1.6em;           /* better spacing */
+}
+
+.consultant-photo {
+  width: 130px;          /* match original width */
+  height: auto;          /* height scales automatically */
+  border-radius: 12px;   /* optional rounding */
+  margin-bottom: 20px;
+  border: 3px solid var(--pink);
+  object-fit: contain;    /* scale without cropping */
+}
+
+.consultant-tile {
+  width: 300px;            /* match photo width */
+  padding: 20px;
+  margin: 50px auto;       /* center horizontally */
+  background: rgba(0,0,0,0.4);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  backdrop-filter: blur(5px);
+  color: var(--text-light);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.consultant-tile:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.consultant-tile a {
+  color: var(--pink);           /* pink for visibility */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.consultant-tile a:hover,
+.consultant-tile a:focus {
+  text-decoration: underline;
+  color: #FF9EB3;               /* slightly lighter pink on hover/focus */
+}
+
+.consultant-tile a:visited {
+  color: var(--pink);           /* keep same color after click */
+}
+
+.consultant-tile p a {
+  background: rgba(0,0,0,0.4);  /* semi-transparent background behind text */
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Contact page link styling */
+.contact-link {
+  color: var(--pink);
+  text-decoration: none;
+  font-weight: 500;
+  background: rgba(0,0,0,0.4);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.contact-link:hover,
+.contact-link:focus {
+  color: #FF9EB3;
+  text-decoration: underline;
+}
+
+.contact-link:visited {
+  color: var(--pink);
+}
+
+.mission-photo {
+  display: block;
+  max-width: 100%;   /* ensures it doesn't exceed container width */
+  width: 300px;      /* adjust as needed */
+  height: auto;      /* preserves aspect ratio */
+  margin: 1em auto;  /* centers the image */
+  border-radius: 8px; /* optional: soft corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* optional: subtle shadow */
+}
