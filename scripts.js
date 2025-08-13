@@ -6,3 +6,9 @@ function goToPage(url){
 window.onload = () => {
   document.body.style.opacity = 1;
 };
+
+  document.querySelectorAll('.flip-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      tile.classList.toggle('flipped');
+    });
+  });
